@@ -76,12 +76,10 @@ else{ echo '<b><font color=666666>Offline</font>'; }
                     Suc. SOUL+LUCK: 75%<br />
                     Suc. LIFE: 75%<br />
                     Total de contas:
-                   <?php $sql = mssql_query("SELECT count(*) FROM MEMB_INFO");
-echo mssql_result($sql, 0, 0); ?>
+                  
                     <br />
                     Total de chars:
-                   <?php $sql = mssql_query("SELECT count(*) FROM Character");
-echo mssql_result($sql, 0, 0); ?>
+         
                     <br />
                   </span></td>
                 </tr>
