@@ -56,6 +56,12 @@ body {
                   <td width="10">&nbsp;</td>
                   <td width="145"><span class="textosp">Servidor: MU UFU MC<br />
                     Status: <span class="texto">
+
+<? $fp = @fsockopen("127.0.0.1", 55901, $errno, $errstr, 1);
+if($fp >= 1){ 
+echo '<b><font color=006600>Online</font>';}
+else{ echo '<b><font color=666666>Offline</font>'; } 
+?>
                   
                       </span><br />
                     Usu&aacute;rios Online:
@@ -69,9 +75,14 @@ body {
                     Suc. SOUL: 50%<br />
                     Suc. SOUL+LUCK: 75%<br />
                     Suc. LIFE: 75%<br />
-                    Total de contas:<br />
-                    Total de chars:<br />
-                    Total de guilds:<br />
+                    Total de contas:
+                   <?php $sql = mssql_query("SELECT count(*) FROM MEMB_INFO");
+echo mssql_result($sql, 0, 0); ?>
+                    <br />
+                    Total de chars:
+                   <?php $sql = mssql_query("SELECT count(*) FROM Character");
+echo mssql_result($sql, 0, 0); ?>
+                    <br />
                   </span></td>
                 </tr>
             </table>
@@ -121,7 +132,7 @@ body {
     </table>
     <br />
   </div>
-  <div class="textosp" id="rodape">Todos os direitos reservados &copy; - MUU-FU-MC </div>
+  <div class="textosp" id="rodape">Todos os direitos reservados &copy; - MU-UFU-MC </div>
 </div>
 </body>
 </html>

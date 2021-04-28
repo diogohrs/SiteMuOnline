@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Cadastrar</title>
+<title>Untitled Document</title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <style type="text/css">
 <!--
@@ -13,7 +13,32 @@ body {
 </style>
 <link href="estilos.css" rel="stylesheet" type="text/css">
 </head>
-
+<?
+$maxacc=10000;
+include("config.php");
+$accts=mssql_query("SELECT memb___id FROM MEMB_INFO");
+$rows=mssql_num_rows($accts);
+if(isset($_POST['login'])){
+	$login=$_POST['login'];
+	$senha=$_POST['senha'];
+	$email=$_POST['email'];
+	$verify=mssql_query("SELECT memb___id FROM MEMB_INFO WHERE memb___id='".$login."'");
+	$ok=mssql_num_rows($verify);
+	if($rows>=$maxacc){
+		$resultado="Max acc exedido";
+	}
+	else if($ok>0){
+		$resultado="Já existe login $login";
+	}
+	else{
+		mssql_query("SET IDENTITY_INSERT MEMB_INFO ON");
+		$msquery = "INSERT INTO MEMB_INFO (memb___id,memb__pwd,email) VALUES ('$login','$senha','$email')";
+		mssql_query($msquery);
+		$rows++;
+		$resultado="ACC $login Criada";
+	}
+}
+?>
 <style type="text/css">
 <!--
 body {
@@ -32,9 +57,45 @@ function send(){
 	if(erro!=''){ alert(erro) }
 	else { document.form1.submit() }
 }
-
+var display_url=0
+function showmenuie5(){
+var rightedge=document.body.clientWidth-event.clientX
+var bottomedge=document.body.clientHeight-event.clientY
+if (rightedge<ie5menu.offsetWidth)
+ie5menu.style.left=document.body.scrollLeft+event.clientX-ie5menu.offsetWidth
+else
+ie5menu.style.left=document.body.scrollLeft+event.clientX
+if (bottomedge<ie5menu.offsetHeight)
+ie5menu.style.top=document.body.scrollTop+event.clientY-ie5menu.offsetHeight
+else
+ie5menu.style.top=document.body.scrollTop+event.clientY
+ie5menu.style.visibility="visible"
+return false
+}
+function hidemenuie5(){
+ie5menu.style.visibility="hidden"
+}
+function highlightie5(){
+if (event.srcElement.className=="menuitems"){
+event.srcElement.style.backgroundColor="highlight"
+event.srcElement.style.color="white"
+if (display_url==1)
+window.status=event.srcElement.url
+}
+}
+function lowlightie5(){
+if (event.srcElement.className=="menuitems"){
+event.srcElement.style.backgroundColor=""
+event.srcElement.style.color="black"
+window.status=''
+}
+}
+function jumptoie5(){
+if (event.srcElement.className=="menuitems")
+window.location=event.srcElement.url
+}
 </script>
-<title>Cadastro</title>
+<title>Cadastrot</title>
 </head>
 <body scroll=no onLoad="hidemenuie5()">
 <div align="left">
@@ -106,3 +167,52 @@ function send(){
         </table>
     </div>      <p align="left">&nbsp;</p></td>
   </tr>
+<!--[if IE]>
+<div id="ie5menu" onMouseover="highlightie5()" onMouseout="lowlightie5()" onClick="jumptoie5()">
+<div class="menuitems" url="javascript:history.go(0)">Atualizar</div>
+<div class="menuitems" url="javascript:history.go(-1)">Voltar</div>
+<div class="menuitems" url="info.php">Principal</div>
+</div>
+<![endif]-->
+<script language="JavaScript1.2">
+document.oncontextmenu=showmenuie5
+if (document.all&&window.print)
+document.body.onclick=hidemenuie5
+</script> 
+<script language=JavaScript>
+
+<!--
+
+
+
+var message="";
+
+///////////////////////////////////
+
+function clickIE() {if (document.all) {(message);return false;}}
+
+function clickNS(e) {if 
+
+(document.layers||(document.getElementById&&!document.all)) {
+
+if (e.which==2||e.which==3) {(message);return false;}}}
+
+if (document.layers) 
+
+{document.captureEvents(Event.MOUSEDOWN);document.onmousedown=clickNS;}
+
+else{document.onmouseup=clickNS;document.oncontextmenu=clickIE;}
+
+// --> 
+
+</script>
+</table>
+</body>
+</html>
+<body><div align="center">
+</body>
+</html>
+</p>
+  </div>
+</body>
+</html>
