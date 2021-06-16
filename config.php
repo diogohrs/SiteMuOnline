@@ -13,10 +13,10 @@ foreach($_POST as $value)
 $dbhost = "127.0.0.1";
 
 // Enter the username to connect to the db
-$dbuser = "sa";
+$dbuser = "root";
 
 // Enter the password for the SQL Server
-$dbpasswd = "soeupowx3";
+$dbpasswd = "103099";
 
 //Admin Login
 $alogin = "admDiogo";
@@ -25,7 +25,7 @@ $alogin = "admDiogo";
 $apass = "soeupowx3";
 
 //Database Name
-$db = 'MuOnline';
+$db = 'muonline';
 
 //Host. IP If working remotely
 $host = '127.0.0.1';

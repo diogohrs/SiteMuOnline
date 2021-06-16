@@ -1,5 +1,6 @@
-<?PHP include("config.php");
-require_once "sql_inject.php"; 
+<?PHP include("conexao.php");
+require_once "login.php";
+require_once "sql_inject.php";
 $bDestroy_session = TRUE; 
 $url_redirect = 'index.php'; 
 $sqlinject = new sql_inject('./log_file_sql.log',$bDestroy_session,$url_redirect)  ; 
@@ -54,15 +55,15 @@ $pass = htmlspecialchars($pass,ENT_QUOTES);
 $login = stripslashes($_POST['login']);
 $login = htmlspecialchars($login,ENT_QUOTES);
 
-$sql_username_check = "SELECT memb___id FROM MEMB_INFO WHERE memb___id='$login'";
+$sql_username_check = "SELECT memb___id FROM memb_info WHERE memb___id='$login'";
 $sqlinject->test($sql_username_check); 
-$sql_username_check = mssql_query($sql_username_check); 
-$username_check 	= mssql_num_rows($sql_username_check); 
+$sql_username_check = mysqli_query($sql_username_check); 
+$username_check 	= mysqli_num_rows($sql_username_check); 
 
-$sql_pass_check = "SELECT memb__pwd FROM MEMB_INFO WHERE memb__pwd='$pass' AND memb___id = '$login'";
+$sql_pass_check = "SELECT memb__pwd FROM memb_info WHERE memb__pwd='$pass' AND memb___id = '$login'";
 $sqlinject->test($sql_pass_check); 
-$sql_pass_check = mssql_query($sql_pass_check); 
-$pass_check = mssql_num_rows($sql_pass_check); 
+$sql_pass_check = mysqli_query($sql_pass_check); 
+$pass_check = mysqli_num_rows($sql_pass_check); 
 
 if (empty($login) || empty($pass) || ($username_check <= 0) || ($pass_check <= 0))
 {
@@ -76,8 +77,8 @@ if (empty($login) || empty($pass) || ($username_check <= 0) || ($pass_check <= 0
 }
 else
 {
-	$SQL_Verift = mssql_query( "SELECT * FROM AccountCharacter WHERE Id = '$login'");
-	$Resultado = mssql_fetch_object( $SQL_Verift );
+	$SQL_Verift = mysqli_query( "SELECT * FROM accountcharacter WHERE Id = '$login'");
+	$Resultado = mysqli_fetch_object( $SQL_Verift );
 	$VipPlace = $Resultado->vip;
 	if ( $VipPlace == "" )
 	{
@@ -85,15 +86,15 @@ else
 	} else {
 		echo "<script>window.alert(\"Olá VIP! Aguarde...\");window.location='manager.php'</script>";
 	}
-	$sql_nome = "SELECT memb_name FROM MEMB_INFO WHERE memb___id='$login'";
+	$sql_nome = "SELECT memb_name FROM memb_info WHERE memb___id='$login'";
 	$sqlinject->test($sql_nome); 
-	$sql_nome = mssql_query($sql_nome); 
-	$nome = mssql_result($sql_nome, 0,0);
+	$sql_nome = mysqli_query($sql_nome); 
+	$nome = mysql_result($sql_nome, 0,0);
 
-	$sql_mail = "SELECT mail_addr FROM MEMB_INFO WHERE memb___id='$login'";
+	$sql_mail = "SELECT mail_addr FROM memb_info WHERE memb___id='$login'";
 	$sqlinject->test($sql_mail); 
-	$sql_mail = mssql_query($sql_mail); 
-	$email = mssql_result($sql_mail, 0,0);
+	$sql_mail = mysqli_query($sql_mail); 
+	$email = mysql_result($sql_mail, 0,0);
 
 	setcookie("login", $login);
 	setcookie("pass", $pass);

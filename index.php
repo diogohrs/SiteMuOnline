@@ -1,3 +1,8 @@
+<?php
+    require_once 'conexao.php';
+    $u = new usuario();
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -25,6 +30,8 @@ body {
         <td width="155" background="imagens/img_menu.gif"><div id="menu_esquerdo"><img src="imagens/img_usuario.gif" width="155" height="24" />
             <div id="login_area">
                <form action="logar.php" target="main" method="post" name="login" id="login">
+
+
                   <div align="center">
                     <table width="123" border="0" cellspacing="0" cellpadding="0">
                       <tr>
@@ -48,7 +55,7 @@ body {
                     </table>
                   </div>
               </form>
-                <div align="center"><a href="register.php" target="main" class="linque1">Fa&ccedil;a j&aacute; seu cadastro!</a> </div>
+                <div align="center"><a href="cadastro.php" target="main" class="linque1">Fa&ccedil;a j&aacute; seu cadastro!</a> </div>
             </div>
               <p><img src="imagens/img_informacoes.gif" width="155" height="21" /></p>
           <table width="155" border="0" cellspacing="0" cellpadding="0">

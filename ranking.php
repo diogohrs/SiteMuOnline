@@ -2,9 +2,9 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <?
-include("config.php");
-$query = 'SELECT TOP 100 Name,Class,cLevel,Resets from Character order by Resets desc, cLevel desc ';
-$result = mssql_query($query);
+include("conexao.php");
+$query = mysqli_query('SELECT TOP 100 Name,Class,cLevel,Resets from character order by Resets desc, cLevel desc');
+$result = mysqli_query($query);
 ?>
 <style type="text/css">
 <!--
@@ -98,9 +98,9 @@ body,td,th {
           <td width="41" align="center" class="texto"><div align="center" class="texto style97">Resets</div></td>
         </tr>
         <?
-		for($i=0;$i < mssql_num_rows($result);++$i)
+		for($i=0;$i < mysqli_num_rows($result);++$i)
 			{
-			$row = mssql_fetch_row($result);
+			$row = mysqli_fetch_row($result);
 			$rank = $i+1;
 			if($row[1] == 0){ $row[1] =  'DW';
 			}

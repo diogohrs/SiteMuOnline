@@ -1,4 +1,4 @@
-<?PHP include("config.php");
+<?PHP include("conexao.php");
 require_once "sql_inject.php"; 
 $bDestroy_session = TRUE; 
 $url_redirect = 'index.php'; 

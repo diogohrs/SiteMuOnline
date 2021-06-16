@@ -15,15 +15,16 @@ body {
 </head>
 <?
 $maxacc=10000;
-include("config.php");
-$accts=mssql_query("SELECT memb___id FROM MEMB_INFO");
-$rows=mssql_num_rows($accts);
+include("conexao.php");
+require_once "cadastro.php";
+$accts=mysqli_query("SELECT memb___id FROM memb_info");
+$rows=mysqli_num_rows($accts);
 if(isset($_POST['login'])){
 	$login=$_POST['login'];
 	$senha=$_POST['senha'];
 	$email=$_POST['email'];
-	$verify=mssql_query("SELECT memb___id FROM MEMB_INFO WHERE memb___id='".$login."'");
-	$ok=mssql_num_rows($verify);
+	$verify=mysqli_query("SELECT memb___id FROM memb_info WHERE memb___id='".$login."'");
+	$ok=mysqli_num_rows($verify);
 	if($rows>=$maxacc){
 		$resultado="Max acc exedido";
 	}
@@ -31,9 +32,9 @@ if(isset($_POST['login'])){
 		$resultado="Já existe login $login";
 	}
 	else{
-		mssql_query("SET IDENTITY_INSERT MEMB_INFO ON");
-		$msquery = "INSERT INTO MEMB_INFO (memb___id,memb__pwd,email) VALUES ('$login','$senha','$email')";
-		mssql_query($msquery);
+		mysqli_query("SET IDENTITY_INSERT memb_info ON");
+		$msquery = "INSERT INTO memb_info (login,memb__pwd,email) VALUES ('$login','$senha','$email')";
+		mysqli_query($msquery);
 		$rows++;
 		$resultado="ACC $login Criada";
 	}
@@ -95,7 +96,7 @@ if (event.srcElement.className=="menuitems")
 window.location=event.srcElement.url
 }
 </script>
-<title>Cadastrot</title>
+<title>Cadastro</title>
 </head>
 <body scroll=no onLoad="hidemenuie5()">
 <div align="left">
